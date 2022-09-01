@@ -9,3 +9,4 @@ credentials*
 *.parquets
 *.venv/*
 *.ipynb
+mlruns/

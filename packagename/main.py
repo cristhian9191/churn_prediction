@@ -1,3 +1,4 @@
+
 from argparse import ArgumentParser
 from database.database import LinesDataLoader, DataSheetsEnum
 from preprocessing.preprocessing  import LinesDataPreprocesser
@@ -12,6 +13,8 @@ from imblearn.over_sampling import SMOTE
 
 def make_parser() -> ArgumentParser:
     parser = ArgumentParser()
+    parser.add_argument("--input_path", type=str)
+    parser.add_argument("--output_path", type=str)
     parser.add_argument("--n_estimators", type=int)
     parser.add_argument("--max_depth", type=int)
     return parser
@@ -29,7 +32,7 @@ if __name__ == "__main__":
                DataSheetsEnum.RECLAMOS: 'Reclamos lineas'
             }
 
-    loader = (LinesDataLoader().add_path("/home/hduser/datasets/dataproyecto.xlsx")
+    loader = (LinesDataLoader().add_path(args.input_path)
                             .load(sheets)
                             .MergeLinesData("codigo del cliente"))
 
@@ -91,10 +94,10 @@ if __name__ == "__main__":
         metrics = metrics_calculator.compute(y_test, y_pred)
         print(metrics)
 
-        extractor.save("/home/hduser/datasets/features")
+        extractor.save(f"{args.output_path}/features")
 
-        mlflow.log_artifact("/home/hduser/datasets/features_x.npy")
-        mlflow.log_artifact("/home/hduser/datasets/features_y.npy")
+        mlflow.log_artifact(f"{args.output_path}/features_x.npy")
+        mlflow.log_artifact(f"{args.output_path}/features_y.npy")
 
         for metric in ClassificationMetricsEnum:
             metric_name = metric.name.lower()

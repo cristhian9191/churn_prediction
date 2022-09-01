@@ -1,8 +1,17 @@
 name: "project_mlds6"
 
 entry_points:
-   project_mlds6_rf:
+   project_mlds6_rf1:
       parameters:
+        input_path: {type: str, default: "/home"}
+        output_path: {type: str, default: "/home"}
         n_estimators: {type: int, default: 100}
         max_depth: {type: int, default: 30}
-      command: "python packagename/main.py --n_estimators {n_estimators} --max_depth {max_depth}"
+      command: "python packagename/main.py --input_path {input_path} --output_path {output_path} --n_estimators {n_estimators} --max_depth {max_depth}"
+   project_mlds6_rf2:
+      parameters:
+        input_path: {type: str, default: "/home"}
+        output_path: {type: str, default: "/home"}
+        n_estimators: {type: int, default: 200}
+        max_depth: {type: int, default: 50}
+      command: "python packagename/main.py --input_path {input_path} --output_path {output_path} --n_estimators {n_estimators} --max_depth {max_depth}"
