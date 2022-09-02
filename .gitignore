@@ -3,7 +3,6 @@ env_vars*
 credentials*
 **/build/*
 **__pycache__
-*.lock
 *.csv
 *.xlsx
 *.parquets
